@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        /* Định dạng tổng thể */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark Mode */
+        body.dark {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        /* Light Mode */
+        body.light {
+            background: linear-gradient(135deg, #ffffff, #dddddd);
+            color: black;
+        }
+
+        .digital-clock {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+        }
+
+        body.light .digital-clock {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .week {
+            margin-bottom: 20px;
+        }
+
+        .week div {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        body.light .week div {
+            background: rgba(0, 0, 0, 0.1);
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .week .active {
+            background-color: #ff9800;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        body.light .week .active {
+            background-color: #ff9800;
+            color: black;
+        }
+
+        .time {
+            font-size: 64px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        .toggle-mode {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        body.light .toggle-mode {
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body class="dark">
+    <button class="toggle-mode" onclick="toggleMode()">Switch to Light Mode</button>
+    <div class="container">
+        <div class="digital-clock">
+            <div class="week">
+                <div>SUN</div>
+                <div>MON</div>
+                <div>TUE</div>
+                <div>WED</div>
+                <div>THU</div>
+                <div>FRI</div>
+                <div>SAT</div>
+            </div>
+            <div class="time" id="time">00:00:00</div>
+        </div>
+    </div>
+
+    <script src="./clock.js"></script>
+</body>
+</html>
