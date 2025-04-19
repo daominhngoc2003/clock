@@ -86,18 +86,30 @@
             top: 20px;
             right: 20px;
             padding: 10px 20px;
-            background: #ff9800;
+            background: linear-gradient(135deg, #ff9800, #ff5722);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
             font-size: 16px;
-            transition: background 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .toggle-mode:hover {
+            background: linear-gradient(135deg, #ff5722, #ff9800);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         }
 
         body.light .toggle-mode {
-            background: #333;
+            background: linear-gradient(135deg, #333, #555);
             color: white;
+        }
+
+        body.light .toggle-mode:hover {
+            background: linear-gradient(135deg, #555, #333);
         }
     </style>
 </head>

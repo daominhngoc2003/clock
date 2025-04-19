@@ -14,21 +14,32 @@ function toggleMode() {
     }
 }
 
-// Hàm tạo âm thanh "tích tắc" bằng Web Audio API
-function playTickSound() {
+// Hàm tạo âm thanh với tần số và âm lượng tùy chỉnh
+function playSound(frequency, volume, duration) {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
 
-    oscillator.type = 'sine'; // Loại sóng âm (sine, square, sawtooth, triangle)
-    oscillator.frequency.setValueAtTime(1000, audioContext.currentTime); // Tần số âm thanh (Hz)
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime); // Âm lượng
+    oscillator.type = 'sine'; // Loại sóng âm (sine)
+    oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime); // Tần số âm thanh (Hz)
+    gainNode.gain.setValueAtTime(volume, audioContext.currentTime); // Âm lượng
 
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
 
     oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.1); // Phát âm thanh trong 0.1 giây
+    oscillator.stop(audioContext.currentTime + duration); // Phát âm thanh trong thời gian `duration`
+}
+
+// Hàm phát âm thanh "tích tắc" nhẹ nhàng hoặc âm thanh lớn khi đến tròn giờ
+function playTickSound(seconds) {
+    if (seconds === 0) {
+        // Phát âm thanh lớn hơn khi đến tròn giờ
+        playSound(800, 0.5, 0.2); // Tần số 800Hz, âm lượng 0.5, thời gian 0.2 giây
+    } else {
+        // Phát âm thanh nhẹ nhàng mỗi giây
+        playSound(400, 0.1, 0.1); // Tần số 400Hz, âm lượng 0.1, thời gian 0.1 giây
+    }
 }
 
 // Hàm cập nhật thời gian
@@ -48,8 +59,8 @@ function updateClock() {
         el.classList.toggle('active', index === day); // Thêm lớp 'active' cho ngày hiện tại
     });
 
-    // Phát âm thanh "tích tắc"
-    playTickSound();
+    // Phát âm thanh "tích tắc" hoặc âm thanh lớn khi đến tròn giờ
+    playTickSound(parseInt(seconds, 10));
 }
 
 // Gọi hàm mỗi giây
